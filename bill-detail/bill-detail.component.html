@@ -1,0 +1,222 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="btn-group">
+          <a [routerLink]="['print/bill/', url]" class="btn btn-sm btn-secondary"> <i class=""></i> Print Bill  </a>
+          <button (click)="downloadPDF()" type="button" class="btn btn-sm btn-primary">Download PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-12 col-lg-12 d-flex justify-content-end">
+    <div class="btn-group">
+      <button (click)="goBack()" type="button" class="btn btn-secondary">Go Back</button>
+      <button (click)="downloadPDF()" type="button" class="btn btn-primary">Download PDF</button>
+    </div>
+  </div>
+
+</div>
+<div class="row" >
+  <div class="col-sm-6 col-md-6 offset-md-3 offset-sm-3">
+    <div class="card" style="opacity: 0.8;">
+      <div class="card-body">
+        <div class="row text-center">
+
+          <div class="col-md-2">
+            <img src="assets/images/kgirs.jpeg" height="82" width="82" alt="KGIRS">
+          </div>
+
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="bill-heading-two">
+                  KOGI STATE GOVERNMENT
+                </h2>
+                <h3 class="bill-heading-three">CENTRAL BILLING SYSTEM</h3>
+                <h4 class="bill-heading-four">NO. 1 BEACH ROAD, LOKOJA, KOGI STATE, NIGERIA.</h4>
+                <h5 class="bill-heading-five">PHONE: 08083427276</h5>
+              </div>
+              <div class="col-md-12 d-flex justify-content-center mt-1">
+                <div class="table-responsive w-100">
+                  <table class="w-100">
+                    <tr style="background:#0a3622; color: #ffffff;">
+                      <td style="padding: 2px;">LAND USE CHARGE ASSESSMENT {{assessmentYear}}</td>
+                    </tr>
+                    <tr style="background:#3870C2; color: #ffffff;">
+                      <td style="padding: 2px;">DEMAND NOTICE</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 ">
+            <img src="assets/images/scan-me.png" height="82" width="82" alt="Scan me">
+          </div>
+
+        </div>
+
+        <div class="row watermar" style="background: url('./assets/images/kogi-logo.jpe');" >
+          <div class="col-md-12 col-sm-12">
+            <div class="row bill-wrapper">
+              <h3 class="text-uppercase owner-details">Property/Owner Details:</h3>
+              <div class="row">
+                <div class="col-md-6 pl-4 pt-2 justify-content-start">
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">Bill To:</h3>
+                    <h5 class="text-uppercase label-value">{{ownerName}} ({{buildingCode}})</h5>
+                  </div>
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">Contact Address:</h3>
+                    <h5 class="text-uppercase label-value">{{contactAddress}}</h5>
+                  </div>
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">Property Classification:</h3>
+                    <h5 class="text-uppercase label-value">{{propertyClassification}}</h5>
+                  </div>
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">KGTIN:</h3>
+                    <h5 class="text-uppercase label-value">{{kgTin || '-'}}</h5>
+                  </div>
+                </div>
+
+                <div class="col-md-6 pl-4 pt-2 align-content-end">
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">Date:</h3>
+                    <h5 class="text-uppercase label-value">{{entryDate}}</h5>
+                  </div>
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">Assessment No.:</h3>
+                    <h5 class="text-uppercase label-value">{{assessmentNo}}</h5>
+                  </div>
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">Property Address:</h3>
+                    <h5 class="text-uppercase label-value">{{propertyAddress}}</h5>
+                  </div>
+                  <div class="mb-1">
+                    <h3 class="text-uppercase owner-labels">PHONE:</h3>
+                    <h5 class="text-uppercase label-value">{{phoneNo}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div class="col-md-12 mt-3 text-center mt-4">
+              <div class="table-responsive w-100">
+                <table class="w-100" style="border: 1px solid #000000;">
+                  <tr style="color: #030202; font-weight: bold; border-bottom: 1px solid #000000;">
+                    <td colspan="3" style="padding: 2px;">{{assessmentYear}} LAND USE CHARGE (LUC) OF PROPERTY</td>
+                  </tr>
+                  <tr style="color: #030202; border-bottom: 1px solid #000000;">
+                    <td style="font-weight: bold; padding: 2px; border-right: 2px solid #000000;">ASSESSED VALUE ({{ APP_CURRENCY }})</td>
+                    <td style="font-weight: bold; padding: 2px; border-right: 2px solid #000000;">CHARGE RATE (%)</td>
+                    <td style="font-weight: bold; padding: 2px;"> LUC AMOUNT ({{ APP_CURRENCY }})</td>
+                  </tr>
+                  <tr style="color: #030202;">
+                    <td style="font-weight: bold; padding: 2px;">{{assessValue.toLocaleString()}} x </td>
+                    <td style="font-weight: bold; padding: 2px;"> {{chargeRate}}  </td>
+                    <td style="font-weight: bold; padding: 2px;">= {{ (billAmount).toLocaleString() }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+
+
+
+
+
+          <div class="col-md-12 col-sm-12 mt-4">
+            <div class="bill-wrapper ">
+              <h3 class="text-uppercase owner-details">Billing Details:</h3>
+              <div class="row">
+                <div class="row">
+                  <div class="col-md-6 pl-4 pt-2 justify-content-start">
+                    <div class="mb-1">
+                      <h3 class="text-uppercase owner-labels">Description:</h3>
+                      <h5 class=" label-value">Balance carried forward from previous years</h5>
+                    </div>
+                    <div class="mb-1">
+                      <h3 class="text-uppercase owner-labels">ANNUAL LUC {{assessmentYear}}:</h3>
+                      <h5 class="text-uppercase label-value">Government House, Lokoja, Kogi State.</h5>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-md-6 pl-4 pt-2 align-content-end">
+                    <div class="mb-1">
+                      <h3 class="text-uppercase owner-labels">AMOUNT ({{ APP_CURRENCY}}):</h3>
+                      <h5 class="text-uppercase label-value">20,000.00</h5>
+                    </div>
+                    <div class="mb-1">
+                      <h3 class="text-uppercase owner-labels">25,000.00</h3>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12  ">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3 class="text-uppercase text-left pl-3 owner-details">Total Amount Payable</h3>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-12 mt-3 ml-3">
+              <p><strong>AMOUNT IN WORDS: Forty-Five</strong> Thousand Naira Only</p>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 col-sm-12 mt-4">
+
+            <p>You are required to pay the established levies in the sum above within 30 days from the date of the receipt of this notice.</p>
+            <br>
+            <h6>How to Pay:</h6>
+            <h6>BANK:</h6>
+            <p>
+              This assessment notice can be paid at any Bank Branch (First Bank Plc, Zenith Bank Plc, Union Bank for Africa, United Bank for Africa, Access Bank Nigeria Pl, Fidelity Bank Plc, First City Monument Bank, Globus Bank, Keystone Bank Ltd, Lotus Bank Ltd, Sterling Bank PIc) via:
+            </p>
+            <ul>
+              <li>Paydirect - Kogi State Collections</li>
+              <li>Etranzact - Kogie-Tax</li>
+              <li><strong>POS:</strong> Kogi State Revenue POS Agents</li>
+            </ul>
+            <h6>ONLINE PAYMENT</h6>
+            <p>You can also visit https://taxpayers.irs.kg.gov.ng to view your bill details and pay using card or transfer by login in with your KGTIN, Contact the KGIRS for your password.</p>
+            <br>
+            <h6>OBJECTION</h6>
+            <p>Note that you have the right of objection within the 30 (Thirty) days notice period, after which the assessment becomes Final and Conclusive. However, for the objection to be valid, you are expected to forward payment evidence of your undisputed position alongside your objection. Objection can be done via
+              <a href="https://kslas.kg.gov.ng">kslas.kg.gov.ng</a></p>
+            <br>
+            <p>As we look forward to a timely response and settlement of these obligations, kindly accept the assurance of our highest regards and compliments as always.</p>
+            <br>
+            <p>
+              Yours Sincerely,
+              For: <strong>Kogi State Internal Revenue Service</strong>
+            </p>
+          </div>
+
+
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

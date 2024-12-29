@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-sm-12 col-lg-12 d-flex justify-content-end">
+    <div class="btn-group">
+      <button (click)="goBack()" type="button" class="btn btn-secondary">Go Back</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-lg-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="header-title">
+          <h4 class="card-title">Process Billing</h4>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <p class="mb-3">Kindly choose the necessary parameters to process billing.</p>
+          <form [formGroup]="billingForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group mb-3">
+                  <label for="">LGA: <sup class="text-danger">*</sup> </label>
+                  <select name="lgaId" formControlName="lgaId" id="lgaId" class="form-control">
+                    <option selected disabled>--Select LGA--</option>
+                    @for(item of lgaList; track $index){
+                    <option value="{{ item?.id }}">{{ item?.lgaName }}</option>
+                    }
+                  </select>
+                  <div *ngIf="billingForm.controls['lgaId'].touched && billingForm.controls['lgaId'].errors?.['required']" class="text-danger">
+                    LGA is required
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group mb-3">
+                  <label for="">Year: <sup class="text-danger">*</sup></label>
+                  <input formControlName="year" type="number" class="form-control" placeholder="Year">
+                  <div *ngIf="billingForm.controls['year'].touched && billingForm.controls['year'].errors?.['required']" class="text-danger">
+                    Year is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 d-flex justify-content-center">
+                <div class="btn-group">
+                  <button (click)="retrieveBills()"  class="btn btn-secondary btn-lg">Retrieve Bills</button>
+                  <button (click)="processBilling();" [disabled]="billingForm.invalid " *ngIf="!isFormSubmitted" class="btn btn-primary btn-lg ml-3">Process Bill</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row mt-5">
+  <div class="col-sm-12 col-lg-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="header-title">
+          <h6 class="card-title">Billing Year: <strong>{{billingYear}}</strong></h6>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" *ngIf="isRetrieved">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">LGA</th>
+              <th style="text-align: right;" scope="col"># of Buildings</th>
+              <th style="text-align: right;" scope="col"># of Bills</th>
+              <th style="text-align:right;" scope="col">Billing Amount({{ APP_CURRENCY }})</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>{{ lgaName }}</td>
+              <td style="text-align: right;">{{ noOfBuildings.toLocaleString() }}</td>
+              <td style="text-align: right;">{{ noOfBills.toLocaleString() }}</td>
+              <td style="text-align: right;">{{ billAmount.toLocaleString() }}</td>
+              <td>
+                <a [routerLink]="['/billings/details', billId]"><i class="ri-edit-line text-warning"></i></a>
+              </td>
+            </tr>
+
+
+
+
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="table-responsive" *ngIf="isRetrieved">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">LGA</th>
+              <th style="text-align: right;" scope="col"># of Buildings</th>
+              <th style="text-align: right;" scope="col"># of Bills</th>
+              <th style="text-align:right;" scope="col">Billing Amount({{ APP_CURRENCY }})</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>{{ lgaName }}</td>
+              <td style="text-align: right;">{{ noOfBuildings.toLocaleString() }}</td>
+              <td style="text-align: right;">{{ noOfBills.toLocaleString() }}</td>
+              <td style="text-align: right;">{{ billAmount.toLocaleString() }}</td>
+              <td>
+                <a [routerLink]="['/billings/details', billId]"><i class="ri-edit-line text-warning"></i></a>
+              </td>
+            </tr>
+
+
+
+
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="table-responsive" *ngIf="isProcessed">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Assessment No.</th>
+              <th scope="col">Building Code</th>
+              <th scope="col">Year</th>
+              <th scope="col">Zone</th>
+              <th scope="col">Category</th>
+              <th scope="col">Owner</th>
+              <th style="text-align:right;" scope="col">Billing Amount({{ APP_CURRENCY }})</th>
+              <th scope="col">Payment</th>
+              <th style="text-align:right;" scope="col">Balance({{ APP_CURRENCY }})</th>
+              <th  scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-toast></p-toast>
+</div>

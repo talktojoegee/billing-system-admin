@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-sm-12 col-lg-12 d-flex justify-content-end">
+    <div class="btn-group">
+      <button (click)="goBack()" type="button" class="btn btn-secondary">Go Back</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+
+      <div class="card-header d-flex justify-content-between">
+        <div class="header-title">
+          <h6 class="card-title text-uppercase">Synchronize Data</h6>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <form action="" [formGroup]="syncForm">
+          <div class="form-group mb-3">
+            <label for="">Choose LGA <sup class="text-danger">*</sup></label>
+            <select name="lgaId" formControlName="lgaId" id="lgaId" class="form-control mt-3">
+              <option disabled selected>--Select LGA--</option>
+              <option *ngFor="let option of lgaList" [value]="option.id">{{option.lgaName}}</option>
+            </select>
+            <div *ngIf="syncForm.controls['lgaId'].touched && syncForm.controls['lgaId'].errors?.['required']" class="text-danger">
+              LGA  is required
+            </div>
+          </div>
+          <div class="form-group d-grid">
+            <button class="btn btn-primary btn-lg btn-block " (click)="syncData()" [disabled]="syncForm.invalid " *ngIf="!isFormSubmitted">Sync Data</button>
+            <button class="btn btn-secondary btn-lg btn-block " disabled *ngIf="isFormSubmitted">Synchronizing Data...</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <p-toast></p-toast>
+</div>
+
+
+<div class="card mt-4">
+  <div class="card-header d-flex justify-content-between">
+    <div class="header-title">
+      <h6 class="card-title text-uppercase">Data Synchronization Log</h6>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">LGA</th>
+              <th scope="col"># of GIS Records</th>
+              <th scope="col"># of Billing Records</th>
+              <th scope="col">Date Last Sync</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @for(item of logList; track $index){
+            <tr>
+              <td>{{ $index + 1 }}</td>
+              <td>{{ item.lgaName }}</td>
+              <td>{{ item.gis.toLocaleString() }}</td>
+              <td>{{ item.labs.toLocaleString() }}</td>
+              <td>{{ item.lastSync }}</td>
+            </tr>
+
+            }
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

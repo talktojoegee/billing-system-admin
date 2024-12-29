@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-sm-12 col-lg-12 d-flex justify-content-end">
+    <div class="btn-group">
+      <button (click)="goBack()" type="button" class="btn btn-secondary">Go Back</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="row mt-5">
+  <div class="col-sm-12 col-lg-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <div class="header-title">
+          <h6 class="card-title">Outstanding Bills</h6>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Assessment No.</th>
+              <th scope="col">Building Code</th>
+              <th scope="col">Year</th>
+              <th scope="col">Zone</th>
+              <th scope="col">Category</th>
+              <th scope="col">Owner</th>
+              <th style="text-align:right;" scope="col">Billing Amount({{ APP_CURRENCY }})</th>
+              <th scope="col">Payment</th> <!--
+              Table::Bill Payment
+              Building code;
+              Assessment No.;
+              Amount paid;
+              Date paid;
+              Payment mode;
+               -->
+              <th style="text-align:right;" scope="col">Balance({{ APP_CURRENCY }})</th>
+              <th  scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(item of billList; track $index){
+              <tr>
+                <td>{{$index + 1}}</td>
+                <td>{{item?.assessmentNo}}</td>
+                <td>{{item?.buildingCode}}</td>
+                <td>{{item?.year}}</td>
+                <td>{{item?.zoneName}}</td>
+                <td>{{item?.categoryName}}</td>
+                <td>{{item?.owner}}</td>
+                <td style="text-align: right;">{{item?.billAmount.toLocaleString()}}</td>
+                <td>0</td>
+                <td style="text-align: right;">{{item?.balance.toLocaleString()}}</td>
+                <td>
+                  <a [routerLink]="['/billings/details', item.url]">View</a>
+                </td>
+              </tr>
+
+            }
+
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
